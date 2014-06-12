@@ -36,3 +36,9 @@ Your source file (e.g. *path/to/rapydscript/file.pjs*) must end in the `.pjs` ex
 ```
     pip install djscript
 ```
+
+### Under the hood
+
+*   [RapydScript](https://github.com/atsepkov/RapydScript) pre-compiler for Javascript
+*   [virtual-node](https://github.com/elbaschid/virtual-node) for installing [node.js](http://nodejs.org/) in a Python virtualenv.
+*   [Django](https://www.djangoproject.com/) web framework
