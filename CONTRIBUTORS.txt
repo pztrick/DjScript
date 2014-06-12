@@ -1,0 +1,3 @@
+Contributors
+------------
+Patrick Paul <https://github.com/pztrick>
