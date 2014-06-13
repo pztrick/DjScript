@@ -1,6 +1,6 @@
 ### What is DjScript?
 
-`djscript` is a Python package for using **RapydScript** in your Django application. This package installs NodeJS/npm/RapydScript in an isolated virtual environment and includes utilities for writing RapydScript `*.pjs` files in your web application.
+`djscript` is a Python package for using **RapydScript** in your Django application. This package installs NodeJS/npm/RapydScript in an isolated virtual environment and includes utilities for writing RapydScript `*.pyj` files in your web application.
 
 ### What is RapydScript?
 
@@ -29,7 +29,7 @@ For Django development, there is a convenient `djurl` template tag which will fr
     {% djurl 'path.to.rapydscript.file' %}
 ```
 
-Your source file (e.g. *path/to/rapydscript/file.pjs*) must end in the `.pjs` extension. Your target file destination is the value specified in settings.py. Your web server must have correct file permissions to write to your `static/` folder.
+Your source file (e.g. *path/to/rapydscript/file.pyj*) must end in the `.pyj` extension. Your target file destination is the value specified in settings.py. Your web server must have correct file permissions to write to your `static/` folder.
 
 ### Installation
 

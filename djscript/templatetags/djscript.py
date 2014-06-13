@@ -20,7 +20,7 @@ def djurl(dot_path):
         http_path = os.path.join(getattr(settings, 'STATIC_URL', ''), djurls[dot_path])
         if settings.DEBUG:
             # 1) Compile!
-            source_path = "%s.pjs" % os.path.join(getattr(settings, 'PROJECT_HOME'), *dot_path.split('.'))
+            source_path = "%s.pyj" % os.path.join(getattr(settings, 'PROJECT_HOME'), *dot_path.split('.'))
             target_path = os.path.join(getattr(settings, 'STATIC_ROOT'), djurls[dot_path])
 
             cmd = ['rapydscript', source_path, '-o', target_path]
