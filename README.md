@@ -9,6 +9,11 @@ From the RapydScript README: "RapydScript (pronounced 'RapidScript') is a pre-co
 *   Github: <https://github.com/atsepkov/RapydScript>
 *   Community: <http://groups.google.com/group/rapydscript>
 
+### Features
+
+*   Convenient `djurl` templatetag for compiling javascript on page load (`settings.DEBUG = True`)
+*   Exceptions are logged to `django.request` or custom logger (which can be emailed to admins, etc)
+
 ### Usage
 
 For Django development, there is a convenient `djurl` template tag which will freshly compile your RapydScript on each page request. On production, the static compiled javascript is served directly from your `static/` folder.
