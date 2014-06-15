@@ -9,6 +9,7 @@ register = template.Library()
 djurls = getattr(settings, 'DJSCRIPT_PATHS')
 prettify = getattr(settings, 'DJSCRIPT_PRETTIFY', False)
 logger_name = getattr(settings, 'DJSCRIPT_LOGGER_HANDLE', 'django.request')
+djglobals = getattr(settings, 'DJSCRIPT_GLOBAL_DICT', None)
 
 import logging
 logger = logging.getLogger(logger_name)
@@ -29,8 +30,16 @@ def djurl(dot_path):
             source_path = "%s.pyj" % os.path.join(getattr(settings, 'PROJECT_HOME'), *dot_path.split('.'))
             target_path = os.path.join(getattr(settings, 'STATIC_ROOT'), djurls[dot_path])
 
-            cmd = ['rapydscript', source_path, '-p -o' if prettify else '-o', target_path]
-            proc = subprocess.Popen([' '.join(cmd)], shell=True)
+            cmd = ['rapydscript', source_path, '-p' if prettify else '']
+            
+            if djglobals:
+                javascript = "if(%s === undefined){var %s = {};}" % (djglobals, djglobals)
+                cmd.insert(0, "echo '%s' &&" % javascript)
+
+            output = subprocess.check_output([' '.join(cmd)], shell=True)
+
+            with open(target_path, 'w') as fd:
+                fd.write(output)
 
         return http_path
     except Exception as exception:

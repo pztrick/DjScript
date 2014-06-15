@@ -1,6 +1,11 @@
 PENDING
 - Added DJSCRIPT_PRETTIFY config var for prettified js output
 - Added exception logging with DJSCRIPT_LOGGER_NAME config var
-    which defaults to 'django.request' 
+    which defaults to 'django.request'
+- Added DJSCRIPT_GLOBALS_DICT to optionally prepend javascript
+    declaration for dictionary in global namespace
+- Switched from subprocess.Popen to subprocess.check_output to
+    1) use blocking call to ensure file is written before request 
+    2) raise exception if stderr occurs (which propagates to log)
 
 v0.1.0, 2014/06/12 -- Initial release.
