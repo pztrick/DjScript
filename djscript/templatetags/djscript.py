@@ -1,11 +1,17 @@
 from django import template
 from django.conf import settings
+
 import os
 import subprocess
 
 register = template.Library()
 
 djurls = getattr(settings, 'DJSCRIPT_PATHS')
+prettify = getattr(settings, 'DJSCRIPT_PRETTIFY', False)
+logger_name = getattr(settings, 'DJSCRIPT_LOGGER_HANDLE', 'django.request')
+
+import logging
+logger = logging.getLogger(logger_name)
 
 # settings value
 @register.simple_tag
@@ -23,9 +29,10 @@ def djurl(dot_path):
             source_path = "%s.pyj" % os.path.join(getattr(settings, 'PROJECT_HOME'), *dot_path.split('.'))
             target_path = os.path.join(getattr(settings, 'STATIC_ROOT'), djurls[dot_path])
 
-            cmd = ['rapydscript', source_path, '-o', target_path]
+            cmd = ['rapydscript', source_path, '-p -o' if prettify else '-o', target_path]
             proc = subprocess.Popen([' '.join(cmd)], shell=True)
 
         return http_path
-    except KeyError:
-        return None
+    except Exception as exception:
+        logger.exception(exception)
+        return "djscript-djurl-exception.500"

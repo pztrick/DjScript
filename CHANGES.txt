@@ -1,1 +1,6 @@
+PENDING
+- Added DJSCRIPT_PRETTIFY config var for prettified js output
+- Added exception logging with DJSCRIPT_LOGGER_NAME config var
+    which defaults to 'django.request' 
+
 v0.1.0, 2014/06/12 -- Initial release.
