@@ -13,6 +13,7 @@ From the RapydScript README: "RapydScript (pronounced 'RapidScript') is a pre-co
 
 *   Convenient `djurl` templatetag for compiling javascript on page load (`settings.DEBUG = True`)
 *   Exceptions are logged to `django.request` or custom logger (which can be emailed to admins, etc)
+*   Parses Django templatetags before attempting to compile javascript
 
 ### Usage
 

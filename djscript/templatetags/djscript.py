@@ -1,5 +1,6 @@
 from django import template
 from django.conf import settings
+from django.shortcuts import render_to_response
 
 import os
 import subprocess
@@ -26,11 +27,18 @@ def djurl(dot_path):
     try:
         http_path = os.path.join(getattr(settings, 'STATIC_URL', ''), djurls[dot_path])
         if settings.DEBUG:
-            # 1) Compile!
             source_path = "%s.pyj" % os.path.join(getattr(settings, 'PROJECT_HOME'), *dot_path.split('.'))
             target_path = os.path.join(getattr(settings, 'STATIC_ROOT'), djurls[dot_path])
 
-            cmd = ['rapydscript', source_path, '-p' if prettify else '']
+            # 1) Parse any templatetags
+            temp_file = open(source_path + ".temp", 'w')
+            temp_path = temp_file.name
+            fake_response = render_to_response(source_path)
+            temp_file.write(fake_response.content)
+            temp_file.close()
+
+            # 2) Compile to javascript
+            cmd = ['rapydscript', temp_path, '-p' if prettify else '']
             
             if djglobals:
                 javascript = "if(%s === undefined){var %s = {};}" % (djglobals, djglobals)
